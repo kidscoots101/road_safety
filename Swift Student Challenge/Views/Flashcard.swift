@@ -28,7 +28,7 @@ struct Flashcard: View {
                 Text(definition)
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.red)
+                    .foregroundColor(Color(red: 0.558, green: 0.002, blue: 0.897))
                     .padding()
                     .opacity(isShowingDefinition ? 1 : 0)
                     .rotation3DEffect(
@@ -37,13 +37,15 @@ struct Flashcard: View {
                     )
             }
             .frame(width: 400, height: 300) // adjusted flashcard size
-            .background(Color.white)
+            .border(Color(red: 0.379, green: 0.006, blue: 0.608), width: 15)
+            .background(Color(red: 0.933, green: 0.868, blue: 1.002))
             .cornerRadius(10)
             .shadow(radius: 5)
             .rotation3DEffect(
                 .degrees(isShowingDefinition ? 180 : 0),
                 axis: (x: 1.0, y: 0.0, z: 0.0)
             )
+//EEDDFF
             .onTapGesture {
                 withAnimation(.easeInOut) {
                     isShowingDefinition.toggle()
@@ -69,9 +71,24 @@ struct FlashcardView: View {
         Flashcard(term: Image("do-not-enter"), definition: "Do not enter"),
         Flashcard(term: Image("no-u-turn"), definition: "No U-turn")]
     var body: some View {
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.white, Color.purple]), startPoint: .top, endPoint: .bottom)
+
             VStack {
+                Text("Road")
+                    .font(.system(size: 100))
+                    .fontWeight(.bold)
+                    .foregroundColor(Color(hue: 0.77, saturation: 0.985, brightness: 0.598))
+                Text("Safety")
+                    .font(.system(size: 100))
+                    .fontWeight(.bold)
+                    .foregroundColor(Color(hue: 0.77, saturation: 0.985, brightness: 0.598))
+                Text("Flashcards")
+                    .font(.system(size: 50))
+                    .fontWeight(.bold)
+                    .foregroundColor(Color(red: 0.473, green: 0.003, blue: 0.951))
                 flashcards[currentIndex]
-                    .padding()
+
                 HStack {
                     Spacer()
                     Button(action: {
@@ -80,8 +97,8 @@ struct FlashcardView: View {
                         }
                     }) {
                         Image(systemName: "arrow.left")
-                            .font(.system(size: 30, weight: .bold))
-                            .foregroundColor(currentIndex == 0 ? .gray : .blue) // Set color to gray when at the beginning
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(currentIndex == 0 ? .gray : .white) // Set color to gray when at the beginning
                     }
                     Spacer()
                     Button(action: {
@@ -90,15 +107,16 @@ struct FlashcardView: View {
                         }
                     }) {
                         Image(systemName: "arrow.right")
-                            .font(.system(size: 30, weight: .bold))
-                            .foregroundColor(currentIndex == flashcards.count - 1 ? .gray : .blue) // Set color to gray when at the end
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(currentIndex == flashcards.count - 1 ? .gray : .white) // Set color to gray when at the end
                     }
                     Spacer()
                 }
-
+                
             }
         }
     }
+}
 
 
 struct Flashcard_Previews: PreviewProvider {
